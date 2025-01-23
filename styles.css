@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  scroll-behavior: smooth;
+  font-family: "Alumni Sans Pinstripe", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+body {
+  margin: 0 auto;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 0;
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+ul,
+li {
+  text-decoration: none;
+  list-style: none;
+}
+
+p {
+  line-height: 1.6;
+}
+
+/* HEADER */
+
+header {
+  width: 100%;
+  max-width: 1280px;
+  padding: 8px;
+  margin: 0 auto;
+}
+
+.header__wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__title {
+  font-size: 36px;
+}
+
+.nav__bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav__list {
+  display: flex;
+  flex-direction: row;
+  font-size: 24px;
+  padding: 8px;
+}
+
+.nav__link {
+  padding: 8px;
+  font-weight: 700;
+}
+
+/* SEARCH */
+
+section {
+    margin: 0 auto;
+}
