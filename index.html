@@ -8,7 +8,8 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="/styles.css" />
-    <title>Search Location</title>
+    <script src="/app.js" defer></script>
+    <title>Weather Search</title>
   </head>
   <body>
     <header class="header">
@@ -35,14 +36,17 @@
           <div class="search__wrapper">
             <h2>Search Your Location Here!</h2>
             <div class="search__bar">
-              <input
-                type="text"
-                placeholder="Enter a location"
-                aria-label="Search location"
-              />
-              <button aria-label="Search">
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </button>
+              <form action="text">
+                <input
+                  type="text"
+                  placeholder="Enter a location"
+                  aria-label="Search location"
+                  required
+                />
+                <button aria-label="Search">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </form>
             </div>
           </div>
         </div>
