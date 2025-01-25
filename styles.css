@@ -46,6 +46,11 @@ p {
   line-height: 1.6;
 }
 
+.dark-theme {
+  background-color: #333;
+  color: #f5f5f5;
+}
+
 /* HEADER */
 
 header {
@@ -118,7 +123,10 @@ header {
   width: 100%;
 }
 
-.nav__link
+.nav__link::before,
+.nav__link::after {
+  transition: all 400ms ease;
+}
 
 .nav__link:hover {
   color: #3c4aeb;
@@ -134,7 +142,7 @@ header {
   transition: all 400ms ease;
 
   i {
-    font-size: 24px;
+    font-size: 28px;
     transition: all 400ms ease;
   }
 }
@@ -147,6 +155,49 @@ header {
     color: #3c4aeb;
   }
 }
+
+/* ABOUT MODAL */
+
+/* Modal Background */
+.modal__about {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+}
+
 
 /* SEARCH */
 
