@@ -199,19 +199,24 @@ header {
   }
 }
 
-/* ABOUT MODAL */
+.contrast:active {
+  transform: scale(1.2);
+}
+
+/* MODALS */
 
 /* Modal Background */
 .modal__background {
   position: fixed;
   top: 0;
-  z-index: -10;
+  z-index: 10;
   width: 100%;
   height: 100%;
   background-color: #030303b7;
   visibility: hidden; /* Start hidden */
   opacity: 0; /* Start with zero opacity */
   transition: all 400ms ease;
+  cursor: default;
 }
 
 .modal__background.show {
@@ -220,17 +225,24 @@ header {
 }
 
 /* Modal */
-.modal__about {
+.modal__about,
+.modal__contact {
   display: none;
   position: fixed;
   z-index: 1000;
   left: 0;
-  top: 25%;
   width: 100%;
   height: 100%;
   overflow: none;
   transition: all 400ms ease;
+}
+
+.modal__about {
   transform: translateX(-100%);
+}
+
+.modal__contact {
+  transform: translateY(-100%);
 }
 
 /* Modal Content */
@@ -254,9 +266,66 @@ header {
   }
 }
 
+.modal__contact .modal-content {
+  display: flex;
+  flex-direction: column;
+
+  form {
+    display: flex;
+    font-size: 24px;
+    font-weight: 700;
+    flex-direction: column;
+  }
+
+  input,
+  textarea {
+    outline: none;
+    resize: none;
+    margin: 12px 0;
+    font-size: 24px;
+    color: #3c4aeb;
+    font-weight: 700;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: solid 1px #4e4e4e;
+  }
+  input:hover,
+  textarea:hover {
+    border-color: #969696;
+  }
+
+  input:focus-within,
+  textarea:focus-within {
+    border-color: #3c4aeb;
+  }
+
+  button {
+    font-size: 28px;
+    font-weight: 700;
+    background-color: #4e4e4e;
+    color: #f5f5f5;
+    border: solid 2px #969696;
+    border-radius: 8px;
+    padding: 12px 0;
+    transition: all 400ms ease;
+  }
+
+  button:hover {
+    background-color: #3c4aeb;
+  }
+
+  button:active {
+    background-color: #eb3c3c;
+    transform: scale(0.8);
+    color: #4e4e4e;
+  }
+}
+
 /* Show Modal */
-.modal__about.show {
-  transform: translateX(0);
+.modal__about.show,
+.modal__contact.show {
+  transform: translate(0, 0);
   display: block;
 }
 

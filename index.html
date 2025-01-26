@@ -21,7 +21,7 @@
           <nav class="nav">
             <ul class="nav__list">
               <li class="nav__link" id="aboutLink">About</li>
-              <li class="nav__link">Contact Us</li>
+              <li class="nav__link" id="contactLink">Contact Us</li>
             </ul>
             <button class="contrast" aria-label="Toggle Theme">
               <i class="fa-solid fa-circle-half-stroke"></i>
@@ -42,6 +42,31 @@
         </p>
       </div>
     </div>
+
+    <!-- CONTACT MODAL -->
+    <div class="modal__background"></div>
+    <div class="modal__contact" id="contactModal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>We'd love to hear from you!</p>
+        <form action="">
+          <label for="name">Name</label>
+          <input type="text" required />
+          <label for="email">E-mail Address</label>
+          <input type="email" required />
+          <label for="message">Your Message</label>
+          <textarea
+            name="message"
+            id="contactMessage"
+            rows="4"
+            maxlength="250"
+          ></textarea>
+          <button class="submit" id=" submitBtn">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- CONTACT OVERLAYS -->
 
     <section class="search-section" id="section">
       <div class="container">
