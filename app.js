@@ -1,4 +1,23 @@
+emailjs.init("cePFoU8dvsaDAlAyz");
+
 // ========== GLOBAL CONSTANTS ==========
+
+document.getElementById("contactModal").addEventListener("submit"),
+  function (event) {
+    event.preventDefault();
+
+    emailjs.sendForm("service_mygmail", "template_dfltemailtemp", this).then(
+      function (response) {
+        console.log("SUCCESS!", response.status, response.text);
+        alert("Email sent successfully!");
+      },
+      function (error) {
+        console.log("FAILED...", error);
+        alert("Failed to send email. Try again later.");
+      }
+    );
+  };
+
 // Modals
 const aboutModal = document.getElementById("aboutModal"); // About modal
 const contactModal = document.getElementById("contactModal"); // Contact modalzz
