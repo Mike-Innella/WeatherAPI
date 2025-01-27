@@ -1,7 +1,7 @@
 // ========== GLOBAL CONSTANTS ==========
 // Modals
 const aboutModal = document.getElementById("aboutModal"); // About modal
-const contactModal = document.getElementById("contactModal"); // Contact modal
+const contactModal = document.getElementById("contactModal"); // Contact modalzz
 
 // Links
 const aboutLink = document.querySelector(".nav__link:nth-child(1)"); // "About" link
