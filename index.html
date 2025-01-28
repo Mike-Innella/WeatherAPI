@@ -21,8 +21,8 @@
         <div class="nav__bar">
           <nav class="nav">
             <ul class="nav__list">
-              <li class="nav__link" id="aboutLink">About</li>
-              <li class="nav__link" id="contactLink">Contact Us</li>
+              <li class="nav__link click" id="aboutLink">About</li>
+              <li class="nav__link click" id="contactLink">Contact Us</li>
             </ul>
             <button class="contrast" aria-label="Toggle Theme">
               <i class="fa-solid fa-circle-half-stroke"></i>
@@ -64,14 +64,14 @@
           ></textarea>
           <button class="submit" id=" submitBtn">Submit</button>
         </form>
-      </div>
 
-      <!-- CONTACT OVERLAYS -->
-      <div class="modal__overlay overlay--loading hidden">
-        <i class="fa-solid fa-gear spinner"></i>
-      </div>
-      <div class="modal__overlay overlay--success hidden">
-        Thank you for your message, we will respond soon!
+        <!-- CONTACT OVERLAYS -->
+        <div class="modal__overlay overlay--loading hidden">
+          <i class="fa-solid fa-spinner spinner"></i>
+        </div>
+        <div class="modal__overlay overlay--success hidden">
+          Thank you for your message, we will respond soon!
+        </div>
       </div>
     </div>
 
