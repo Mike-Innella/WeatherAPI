@@ -1,7 +1,7 @@
 // Initialize EmailJS with public key
-emailjs.init("cdf925f08107fca1910ea91ca3a3f6d9");
+emailjs.init("cePFoU8dvsaDAlAyz");
 
-// ========== GLOBAL CONSTANTS ========== 
+// ========== GLOBAL CONSTANTS ==========
 const aboutModal = document.getElementById("aboutModal");
 const contactModal = document.getElementById("contactModal");
 const contactForm = document.getElementById("contactModalForm");
@@ -17,7 +17,7 @@ const loadingOverlay = document.querySelector(".overlay--loading");
 const successOverlay = document.querySelector(".overlay--success");
 const contactCloseButton = contactModal.querySelector(".close"); // Get the close button inside the contact modal
 
-// ========== FUNCTIONS ========== 
+// ========== FUNCTIONS ==========
 const openModal = (modal) => {
   modal.style.display = "block";
   document.querySelector("header").style.opacity = "0";
@@ -48,7 +48,7 @@ const hideOverlay = (overlay) => {
   overlay.classList.add("hidden");
 };
 
-// ========== EVENT LISTENERS ========== 
+// ========== EVENT LISTENERS ==========
 if (contactForm) {
   contactForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -98,9 +98,13 @@ window.addEventListener("click", (event) => {
 // Dark Theme Toggle
 contrastButton.addEventListener("click", toggleDarkTheme);
 
-// WEATHER CONVERSION
+// CONVERSIONs
 function convertTemp(celsius) {
   return (celsius * 9) / 5 + 32;
+}
+
+function convertSpeed(meters) {
+  return meters * 2.23694;
 }
 
 // WEATHER RESULTS
@@ -130,11 +134,14 @@ document.addEventListener("DOMContentLoaded", () => {
       // Extract relevant weather info
       const { name, main, weather } = data;
       const cityTempFahrenheit = convertTemp(main.temp); // Convert temperature to Fahrenheit
+      const windSpeed = convertSpeed(data.wind.speed);
       weatherDisplay.innerHTML = `
       <h3>Weather in ${name}</h3>
       <p>🌡️ Temperature: ${cityTempFahrenheit.toFixed(2)}°F</p>
       <p>☁️ Condition: ${weather[0].description}</p>
-      <p>💨 Wind Speed: ${data.wind.speed} m/s</p>
+      <p>💨 Wind Speed: ${windSpeed.toFixed(2)} mph</p>
+      <button> Close </button>
+
     `;
     } catch (error) {
       weatherDisplay.innerHTML = `<p style="color: red;">⚠️ ${error.message}</p>`;
