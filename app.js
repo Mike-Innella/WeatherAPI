@@ -142,11 +142,15 @@ document.addEventListener("DOMContentLoaded", () => {
         <p>💨 Wind Speed: ${windSpeed.toFixed(2)} mph</p>
         <button class="close-weather">Close</button>
       `;
-      weatherDisplay.style.display = "block"; // Show result
+      weatherDisplay.style.display = "block";
+      header.style.opacity = "0";
+      searchWrapper.style.opacity = "0"; // Show result
 
       // Close button functionality
       document.querySelector(".close-weather").addEventListener("click", () => {
         weatherDisplay.style.display = "none";
+        header.style.opacity = "1";
+        searchWrapper.style.opacity = "1";
       });
     } catch (error) {
       weatherDisplay.innerHTML = `<p style="color: red;">⚠️ ${error.message}</p>`;

@@ -199,6 +199,12 @@ header {
   color: #3c4aeb;
 }
 
+/* BURGER MENU */
+
+.burger {
+  display: none;
+}
+
 /* MODALS */
 
 /* Modal Background */
@@ -562,4 +568,14 @@ section {
 
 .weather__result button:active {
   background-color: #0000001a;
+}
+
+@media (max-width: 1200px) {
+  .nav__list {
+    display: none;
+  }
+
+  .burger {
+    display: flex;
+  }
 }
