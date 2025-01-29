@@ -98,7 +98,7 @@ window.addEventListener("click", (event) => {
 // Dark Theme Toggle
 contrastButton.addEventListener("click", toggleDarkTheme);
 
-// CONVERSIONs
+// CONVERSION FUNCTIONS
 function convertTemp(celsius) {
   return (celsius * 9) / 5 + 32;
 }
@@ -114,6 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const apiKey = "cdf925f08107fca1910ea91ca3a3f6d9";
   const weatherDisplay = document.createElement("div");
   weatherDisplay.className = "weather__result";
+  weatherDisplay.style.display = "none"; // Hide initially
   document.querySelector(".search-section").appendChild(weatherDisplay);
 
   searchForm.addEventListener("submit", async (event) => {
@@ -123,28 +124,33 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!city) return;
 
     try {
-      // Fetch weather data
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
       );
       if (!response.ok) throw new Error("City not found");
 
       const data = await response.json();
+      const { name, main, weather, wind } = data;
+      const cityTempFahrenheit = convertTemp(main.temp);
+      const windSpeed = convertSpeed(wind.speed);
 
-      // Extract relevant weather info
-      const { name, main, weather } = data;
-      const cityTempFahrenheit = convertTemp(main.temp); // Convert temperature to Fahrenheit
-      const windSpeed = convertSpeed(data.wind.speed);
+      // Show weather result
       weatherDisplay.innerHTML = `
-      <h3>Weather in ${name}</h3>
-      <p>🌡️ Temperature: ${cityTempFahrenheit.toFixed(2)}°F</p>
-      <p>☁️ Condition: ${weather[0].description}</p>
-      <p>💨 Wind Speed: ${windSpeed.toFixed(2)} mph</p>
-      <button> Close </button>
+        <h3>Weather in ${name}</h3>
+        <p>🌡️ Temperature: ${cityTempFahrenheit.toFixed(2)}°F</p>
+        <p>☁️ Condition: ${weather[0].description}</p>
+        <p>💨 Wind Speed: ${windSpeed.toFixed(2)} mph</p>
+        <button class="close-weather">Close</button>
+      `;
+      weatherDisplay.style.display = "block"; // Show result
 
-    `;
+      // Close button functionality
+      document.querySelector(".close-weather").addEventListener("click", () => {
+        weatherDisplay.style.display = "none";
+      });
     } catch (error) {
       weatherDisplay.innerHTML = `<p style="color: red;">⚠️ ${error.message}</p>`;
+      weatherDisplay.style.display = "block"; // Show error message
     }
   });
 });

@@ -557,10 +557,9 @@ section {
 }
 
 .weather__result button:hover {
-  transform: scale(0.8);
+  background-color: #969696;
 }
 
 .weather__result button:active {
-  transform: scale(1.2);
-  
+  background-color: #0000001a;
 }
