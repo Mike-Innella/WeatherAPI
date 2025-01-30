@@ -13,24 +13,30 @@
     <title>Weather Search</title>
   </head>
   <body>
-    <header class="header">
+    <header class="header" id="header">
       <div class="header__wrapper">
         <div class="header__title">
-          <h1>Weather in Your Area</h1>
+          <h1 id="headerTitle">Weather in Your Area</h1>
         </div>
         <nav class="nav">
-          <ul class="nav__list">
-            <li class="nav__link click" id="aboutLink">About</li>
-            <li class="nav__link click" id="contactLink">Contact Us</li>
-          </ul>
-          <button class="contrast" aria-label="Toggle Theme">
-            <i class="fa-solid fa-circle-half-stroke"></i>
-          </button>
+          <div class="navList" id="navList">
+            <ul class="nav__list">
+              <li class="nav__link click" id="aboutLink">About</li>
+              <li class="nav__link click" id="contactLink">Contact Us</li>
+            </ul>
+            <button
+              class="contrast"
+              aria-label="Toggle Theme"
+              onclick="toggleDarkTheme()"
+            >
+              <i class="fa-solid fa-circle-half-stroke"></i>
+            </button>
 
-          <!-- Burger Menu Button -->
-          <button class="burgerBtn" id="burgerOpen">
-            <i class="fa-solid fa-burger"></i>
-          </button>
+            <!-- Burger Menu Button -->
+            <button class="burgerBtn" id="burgerOpen">
+              <i class="fa-solid fa-burger"></i>
+            </button>
+          </div>
 
           <!-- Hidden Burger Menu -->
           <div class="menu" id="burgerMenu">
