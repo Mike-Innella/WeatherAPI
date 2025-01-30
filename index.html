@@ -19,55 +19,62 @@
           <h1 id="headerTitle">Weather in Your Area</h1>
         </div>
         <nav class="nav">
-          <div class="navList" id="navList">
+          <div id="navList">
             <ul class="nav__list">
               <li
-                class="nav__link click"
+                class="nav__link"
                 id="aboutLink"
                 onclick="toggleModal(aboutModal, true)"
               >
                 About
               </li>
               <li
-                class="nav__link click"
+                class="nav__link"
                 id="contactLink"
                 onclick="toggleModal(contactModal, true)"
               >
                 Contact Us
               </li>
             </ul>
-            <button
-              class="contrast"
-              aria-label="Toggle Theme"
-              onclick="toggleDarkTheme()"
-            >
+            <button class="contrast" onclick="toggleDarkTheme()">
               <i class="fa-solid fa-circle-half-stroke"></i>
             </button>
-
-            <!-- Burger Menu Button -->
-            <button class="burgerBtn" id="burgerOpen">
+            <button
+              class="burgerBtn"
+              id="burgerOpen"
+              onclick="toggleBurgerMenu()"
+            >
               <i class="fa-solid fa-burger"></i>
             </button>
           </div>
-
-          <!-- Hidden Burger Menu -->
-          <div class="menu" id="burgerMenu">
+          <!-- Burger Menu (Initially hidden) -->
+          <div class="menu">
+            <button class="burgerClose" onclick="toggleBurgerMenu()">X</button>
             <ul class="nav__list--burger">
-              <li class="nav__link burger__link click" id="aboutLinkBurger">
+              <li
+                class="nav__link"
+                id="aboutLink"
+                onclick="toggleModal(aboutModal, true)"
+              >
                 About
               </li>
-              <li class="nav__link burger__link click" id="contactLinkBurger">
+              <li
+                class="nav__link"
+                id="contactLink"
+                onclick="toggleModal(contactModal, true)"
+              >
                 Contact Us
               </li>
             </ul>
-            <button class="burgerClose" id="burgerClose">&times;</button>
           </div>
         </nav>
       </div>
     </header>
 
-    <!-- ABOUT MODAL -->
-    <div class="modal__background" id="aboutModalBackground"></div>
+    <!-- Modal Background -->
+    <div class="modal__background" id="modalBackground"></div>
+
+    <!-- About Modal -->
     <div id="aboutModal" class="modal__about">
       <div class="modal-content">
         <span class="close" id="closeAboutModal">&times;</span>
@@ -78,28 +85,19 @@
       </div>
     </div>
 
-    <!-- CONTACT MODAL -->
-    <div class="modal__background" id="contactModalBackground"></div>
-    <div class="modal__contact" id="contactModal">
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal__contact">
       <div class="modal-content">
         <span class="close" id="closeContactModal">&times;</span>
         <p>We'd love to hear from you!</p>
-        <form action="" id="contactModalForm">
-          <label for="name">Name</label>
-          <input type="text" required />
-          <label for="email">E-mail Address</label>
-          <input type="email" required />
-          <label for="message">Your Message</label>
-          <textarea
-            name="message"
-            id="contactMessage"
-            rows="4"
-            maxlength="250"
-          ></textarea>
+        <form id="contactModalForm">
+          <label for="name">Name</label><input type="text" required />
+          <label for="email">E-mail Address</label
+          ><input type="email" required />
+          <label for="message">Your Message</label
+          ><textarea id="contactMessage" rows="4" maxlength="250"></textarea>
           <button class="submit" id="submitBtn">Submit</button>
         </form>
-
-        <!-- CONTACT OVERLAYS -->
         <div class="modal__overlay overlay--loading hidden">
           <i class="fa-solid fa-spinner spinner"></i>
         </div>
@@ -109,7 +107,6 @@
       </div>
     </div>
 
-    <!-- SEARCH BAR -->
     <section class="search-section" id="section">
       <div class="container">
         <div class="row">
@@ -117,15 +114,8 @@
             <h2>Search Your Location Here!</h2>
             <div class="search__bar">
               <form action="text">
-                <input
-                  type="text"
-                  placeholder="Enter a location"
-                  aria-label="Search location"
-                  required
-                />
-                <button aria-label="Search">
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
+                <input type="text" placeholder="Enter a location" required />
+                <button><i class="fa-solid fa-magnifying-glass"></i></button>
               </form>
             </div>
           </div>

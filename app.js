@@ -1,8 +1,5 @@
-// Initialize EmailJS
 emailjs.init("cePFoU8dvsaDAlAyz");
 
-// Global Constants
-const body = document.body;
 const aboutModal = document.getElementById("aboutModal");
 const contactModal = document.getElementById("contactModal");
 const contactForm = document.getElementById("contactModalForm");
@@ -11,72 +8,88 @@ const closeAboutModalBtn = document.getElementById("closeAboutModal");
 const closeContactModalBtn = document.getElementById("closeContactModal");
 const contrastButton = document.querySelector(".contrast");
 const weatherDisplay = document.createElement("div");
-const burgerMenu = document.getElementById("burgerMenu");
-const header = document.getElementById("header");
+const searchWrapper = document.getElementById("searchWrapper");
+const successOverlay = document.querySelector(".overlay--success");
+const background = document.getElementById("modalBackground");
 const navList = document.getElementById("navList");
 const headerTitle = document.getElementById("headerTitle");
-const searchWrapper = document.getElementById("searchWrapper"); // Added to handle opacity toggle
+
+// Dark theme toggle
+const toggleDarkTheme = () => document.body.classList.toggle("dark-theme");
 
 // Modal functions
 const toggleModal = (modal, show) => {
+  const background = document.getElementById("modalBackground"); // Always target the same background
+
   if (!modal) return;
-  const background = modal.querySelector(".modal__background");
 
   if (show) {
-    modal.style.display = "block";
-    modal.style.opacity = "1";
     modal.classList.add("show");
-    if (background) background.classList.add("show");
+    background.classList.add("show");
+    setTimeout(() => {
+      header.style.opacity = "0";
+      searchWrapper.style.opacity = "0";
+    }, 50);
   } else {
-    modal.style.display = "none";
     modal.classList.remove("show");
-    if (background) background.classList.remove("show");
+    background.classList.remove("show");
+    header.style.opacity = "1";
+    searchWrapper.style.opacity = "1";
   }
+
+  // Fade in/out background
+  background.style.opacity = show ? "1" : "0";
+  background.style.visibility = show ? "visible" : "hidden";
 };
 
-// Close Modal by clicking background
+// Close modal on background click
 const closeModalOnBackgroundClick = (modal) => {
-  const background = modal.querySelector(".modal__background");
+  const background = document.getElementById("modalBackground");
   background?.addEventListener("click", () => toggleModal(modal, false));
 };
 
-// Open Modals
-aboutLink?.addEventListener("click", () => toggleModal(aboutModal, true));
-contactLink?.addEventListener("click", () => toggleModal(contactModal, true));
+// Modal Open and Close Listeners
+document.querySelectorAll('[data-modal="about"]').forEach((button) => {
+  button.addEventListener("click", () => toggleModal(aboutModal, true));
+});
+document.querySelectorAll('[data-modal="contact"]').forEach((button) => {
+  button.addEventListener("click", () => toggleModal(contactModal, true));
+});
 
-// Close Modals
-closeAboutModalBtn?.addEventListener("click", () =>
+closeAboutModalBtn.addEventListener("click", () =>
   toggleModal(aboutModal, false)
 );
-closeContactModalBtn?.addEventListener("click", () =>
-  toggleModal(contactModal, false)
-);
+closeContactModalBtn.addEventListener("click", () => {
+  toggleModal(contactModal, false);
+  toggleOverlay(successOverlay, false);
+});
 
-// Ensure background click also closes the modal
+window.addEventListener("click", (event) => {
+  if (event.target === aboutModal) toggleModal(aboutModal, false);
+  if (event.target === contactModal) toggleModal(contactModal, false);
+});
+
+// Modal Background Click Handling
 if (aboutModal) closeModalOnBackgroundClick(aboutModal);
 if (contactModal) closeModalOnBackgroundClick(contactModal);
 
-// Dark theme toggle
-const toggleDarkTheme = () => {
-  document.body.classList.toggle("dark-theme");
-};
-
 // Overlay functions
-const toggleOverlay = (overlay, show) => {
-  if (overlay) {
-    overlay.classList.toggle("hidden", !show);
-  }
-};
+const toggleOverlay = (overlay, show) =>
+  overlay?.classList.toggle("hidden", !show);
 
 // Contact form submission
-contactForm?.addEventListener("submit", async function (event) {
+contactForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
   toggleOverlay(document.querySelector(".overlay--loading"), true);
   try {
-    await emailjs.sendForm("service_mygmail", "template_dfltemailtemp", this);
+    await emailjs.sendForm(
+      "service_mygmail",
+      "template_dfltemailtemp",
+      contactForm
+    );
     setTimeout(() => {
       toggleOverlay(document.querySelector(".overlay--loading"), false);
-      toggleOverlay(document.querySelector(".overlay--success"), true);
+      toggleOverlay(successOverlay, true);
     }, 3200);
     contactForm.reset();
   } catch (error) {
@@ -86,29 +99,23 @@ contactForm?.addEventListener("submit", async function (event) {
   }
 });
 
-// Burger menu interactions
-const burgerOpenBtn = document.getElementById("burgerOpen");
-const burgerCloseBtn = document.getElementById("burgerClose");
+//  Burger
+function toggleBurgerMenu() {
+  const menu = document.querySelector(".menu");
+  const isOpening = !menu.classList.contains("menu--open");
 
-burgerOpenBtn?.addEventListener("click", () => {
-  burgerMenu?.classList.add("menu--open");
-  // Set opacity to 0 when the burger menu opens
-  if (navList && searchWrapper && headerTitle) {
-    navList.style.opacity = "0";
-    searchWrapper.style.opacity = "0";
+  menu.classList.toggle("menu--open");
+
+  if (isOpening) {
     headerTitle.style.opacity = "0";
-  }
-});
-
-burgerCloseBtn?.addEventListener("click", () => {
-  burgerMenu?.classList.remove("menu--open");
-  // Set opacity back to 1 when the burger menu closes
-  if (navList && searchWrapper && headerTitle) {
-    navList.style.opacity = "1";
-    searchWrapper.style.opacity = "1";
+    searchWrapper.style.opacity = "0";
+    navList.style.opacity = "0";
+  } else {
     headerTitle.style.opacity = "1";
+    searchWrapper.style.opacity = "1";
+    navList.style.opacity = "1";
   }
-});
+}
 
 // Weather fetching
 const searchForm = document.querySelector(".search__bar form");
@@ -136,16 +143,13 @@ searchForm?.addEventListener("submit", async (event) => {
     `;
     weatherContainer?.appendChild(weatherDisplay);
     weatherDisplay.style.display = "block";
+    header.style.opacity = "0";
+    searchWrapper.style.opacity = "0";
 
-    // Fade out header and search section while weather result is visible
-    if (header) header.style.opacity = "0";
-    if (searchWrapper) searchWrapper.style.opacity = "0";
-
-    // Handle weather display close
     document.querySelector(".close-weather")?.addEventListener("click", () => {
       weatherDisplay.style.display = "none";
-      if (header) header.style.opacity = "1";
-      if (searchWrapper) searchWrapper.style.opacity = "1";
+      header.style.opacity = "1";
+      searchWrapper.style.opacity = "1";
     });
   } catch (error) {
     alert("Failed to fetch weather data. Please try again.");

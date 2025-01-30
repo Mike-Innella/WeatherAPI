@@ -135,10 +135,10 @@ header {
   transition: all 400ms ease;
 }
 
-.navList {
+#navList {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -219,63 +219,87 @@ header {
 .menu {
   position: fixed;
   top: 0;
-  right: -100%;
-  width: 250px;
+  right: -200%;
+  width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.9);
-  transition: right 0.4s ease-in-out;
+  transition: all 200ms ease;
   padding: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .menu--open {
   right: 0;
+  z-index: 100;
 }
 
 .burgerClose {
-  font-size: 24px;
+  font-size: 48px;
+  font-weight: 900;
   background: none;
   border: none;
-  color: white;
+  color: #969696;
   cursor: pointer;
   position: absolute;
-  top: 15px;
-  right: 20px;
+  top: 24px;
+  right: 24px;
+  transition: all 400ms ease;
+}
+
+.burgerClose:hover {
+  transform: scale(0.8);
+}
+
+.burgerClose:active {
+  transform: scale(1.2);
 }
 
 .nav__list--burger {
   list-style: none;
   padding: 0;
+  text-align: center;
+  width: fit-content;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+
+  li {
+    font-size: 48px;
+    width: fit-content;
+  }
 }
 
 /* MODALS */
-
 /* Modal Background */
 .modal__background {
   position: fixed;
   top: 0;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: #030303b7;
-  visibility: hidden; /* Start hidden */
-  opacity: 0; /* Start with zero opacity */
-  transition: all 400ms ease;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 400ms ease, visibility 0ms 400ms ease;
   cursor: default;
 }
 
 .modal__background.show {
+  opacity: 1;
   visibility: visible;
-  opacity: 1; /* Fade in */
+  transition: all 400ms ease;
 }
 
 /* Modal */
 .modal__about,
 .modal__contact {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -363,17 +387,20 @@ header {
 
 .modal__contact button:hover {
   background-color: #3c4aeb;
+  transform: scale(1.05); /* Slightly increase size on hover */
 }
 
 .modal__contact button:active {
   background-color: #eb3c3c;
-  transform: scale(0.8);
+  transform: scale(0.95);
   color: #4e4e4e;
 }
 
 /* Show Modal */
 .modal__about.show,
 .modal__contact.show {
+  visibility: visible;
+  opacity: 1;
   transform: translate(0, 0);
   display: block;
 }
@@ -390,6 +417,7 @@ header {
   right: 0;
   padding: 0 12px 12px 12px;
   z-index: 100;
+  transition: transform 300ms ease;
 }
 
 .close:hover,
@@ -410,7 +438,7 @@ header {
   justify-content: center;
   font-size: 24px;
   z-index: 10;
-  transition: all 400ms ease;
+  transition: opacity 400ms ease;
   opacity: 0;
   top: 0;
   bottom: 0;
@@ -422,7 +450,7 @@ header {
 .overlay--loading,
 .overlay--success {
   opacity: 1;
-  transition: all 400ms ease;
+  transition: opacity 400ms ease;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -461,7 +489,7 @@ header {
 .overlay--success.hidden {
   visibility: hidden;
   opacity: 0;
-  transition: all 400ms ease;
+  transition: opacity 400ms ease, visibility 0ms 400ms;
 }
 
 /* SEARCH */
@@ -480,6 +508,11 @@ section {
   justify-content: center;
   align-items: center;
   margin-top: 128px;
+  transition: all 400ms ease;
+}
+
+#searchWrapper {
+  transition: all 400ms ease;
 }
 
 .search__wrapper h2 {
@@ -619,15 +652,23 @@ section {
 @media (max-width: 1200px) {
   .header__wrapper {
     padding: 24px;
+    justify-content: space-between;
+    width: 100%;
   }
 
   .nav {
+    justify-content: space-around;
     width: 50%;
   }
 
-  .header__title {
-    font-size: 32px;
+  #navList {
+    width: 50%;
   }
+
+  #headerTitle {
+    font-size: 40px;
+  }
+
   .nav__list {
     display: none;
   }
