@@ -99,7 +99,7 @@ contactForm?.addEventListener("submit", async (event) => {
   }
 });
 
-//  Burger
+// Burger
 function toggleBurgerMenu() {
   const menu = document.querySelector(".menu");
   const isOpening = !menu.classList.contains("menu--open");
