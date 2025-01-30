@@ -21,8 +21,20 @@
         <nav class="nav">
           <div class="navList" id="navList">
             <ul class="nav__list">
-              <li class="nav__link click" id="aboutLink">About</li>
-              <li class="nav__link click" id="contactLink">Contact Us</li>
+              <li
+                class="nav__link click"
+                id="aboutLink"
+                onclick="toggleModal(aboutModal, true)"
+              >
+                About
+              </li>
+              <li
+                class="nav__link click"
+                id="contactLink"
+                onclick="toggleModal(contactModal, true)"
+              >
+                Contact Us
+              </li>
             </ul>
             <button
               class="contrast"
@@ -55,10 +67,10 @@
     </header>
 
     <!-- ABOUT MODAL -->
-    <div class="modal__background"></div>
+    <div class="modal__background" id="aboutModalBackground"></div>
     <div id="aboutModal" class="modal__about">
       <div class="modal-content">
-        <span class="close">&times;</span>
+        <span class="close" id="closeAboutModal">&times;</span>
         <p>
           This application provides weather updates for locations around the
           world. Enter a location in the search bar to get started!
@@ -67,10 +79,10 @@
     </div>
 
     <!-- CONTACT MODAL -->
-    <div class="modal__background"></div>
+    <div class="modal__background" id="contactModalBackground"></div>
     <div class="modal__contact" id="contactModal">
       <div class="modal-content">
-        <span class="close">&times;</span>
+        <span class="close" id="closeContactModal">&times;</span>
         <p>We'd love to hear from you!</p>
         <form action="" id="contactModalForm">
           <label for="name">Name</label>
@@ -84,7 +96,7 @@
             rows="4"
             maxlength="250"
           ></textarea>
-          <button class="submit" id=" submitBtn">Submit</button>
+          <button class="submit" id="submitBtn">Submit</button>
         </form>
 
         <!-- CONTACT OVERLAYS -->

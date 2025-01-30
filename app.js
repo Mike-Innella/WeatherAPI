@@ -3,29 +3,58 @@ emailjs.init("cePFoU8dvsaDAlAyz");
 
 // Global Constants
 const body = document.body;
-const contactForm = document.getElementById("contactModalForm");
+const aboutModal = document.getElementById("aboutModal");
 const contactModal = document.getElementById("contactModal");
+const contactForm = document.getElementById("contactModalForm");
 const submitBtn = document.getElementById("submitBtn");
+const closeAboutModalBtn = document.getElementById("closeAboutModal");
+const closeContactModalBtn = document.getElementById("closeContactModal");
 const contrastButton = document.querySelector(".contrast");
 const weatherDisplay = document.createElement("div");
 const burgerMenu = document.getElementById("burgerMenu");
 const header = document.getElementById("header");
 const navList = document.getElementById("navList");
 const headerTitle = document.getElementById("headerTitle");
+const searchWrapper = document.getElementById("searchWrapper"); // Added to handle opacity toggle
 
 // Modal functions
 const toggleModal = (modal, show) => {
   if (!modal) return;
-  modal.style.display = show ? "block" : "none";
-  const background = document.querySelector(".modal__background");
+  const background = modal.querySelector(".modal__background");
+
   if (show) {
+    modal.style.display = "block";
+    modal.style.opacity = "1";
     modal.classList.add("show");
     if (background) background.classList.add("show");
   } else {
+    modal.style.display = "none";
     modal.classList.remove("show");
     if (background) background.classList.remove("show");
   }
 };
+
+// Close Modal by clicking background
+const closeModalOnBackgroundClick = (modal) => {
+  const background = modal.querySelector(".modal__background");
+  background?.addEventListener("click", () => toggleModal(modal, false));
+};
+
+// Open Modals
+aboutLink?.addEventListener("click", () => toggleModal(aboutModal, true));
+contactLink?.addEventListener("click", () => toggleModal(contactModal, true));
+
+// Close Modals
+closeAboutModalBtn?.addEventListener("click", () =>
+  toggleModal(aboutModal, false)
+);
+closeContactModalBtn?.addEventListener("click", () =>
+  toggleModal(contactModal, false)
+);
+
+// Ensure background click also closes the modal
+if (aboutModal) closeModalOnBackgroundClick(aboutModal);
+if (contactModal) closeModalOnBackgroundClick(contactModal);
 
 // Dark theme toggle
 const toggleDarkTheme = () => {
@@ -109,7 +138,6 @@ searchForm?.addEventListener("submit", async (event) => {
     weatherDisplay.style.display = "block";
 
     // Fade out header and search section while weather result is visible
-    const header = document.querySelector("header");
     if (header) header.style.opacity = "0";
     if (searchWrapper) searchWrapper.style.opacity = "0";
 
@@ -120,7 +148,7 @@ searchForm?.addEventListener("submit", async (event) => {
       if (searchWrapper) searchWrapper.style.opacity = "1";
     });
   } catch (error) {
-    weatherDisplay.innerHTML = `<p style="color: red;">⚠️ ${error.message}</p>`;
-    weatherDisplay.style.display = "block";
+    alert("Failed to fetch weather data. Please try again.");
+    console.error(error);
   }
 });

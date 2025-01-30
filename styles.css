@@ -617,8 +617,24 @@ section {
 }
 
 @media (max-width: 1200px) {
+  .header__wrapper {
+    padding: 24px;
+  }
+
+  .nav {
+    width: 50%;
+  }
+
+  .header__title {
+    font-size: 32px;
+  }
   .nav__list {
     display: none;
+  }
+
+  .navList {
+    justify-content: space-around;
+    width: 100%;
   }
 
   .burgerBtn {
