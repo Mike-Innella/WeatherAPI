@@ -13,29 +13,38 @@
     <title>Weather Search</title>
   </head>
   <body>
-    <header class="header" id="header">
+    <header class="header">
       <div class="header__wrapper">
         <div class="header__title">
-          <h1>Weather in your area</h1>
+          <h1>Weather in Your Area</h1>
         </div>
-        <div class="nav__bar">
-          <nav class="nav">
-            <ul class="nav__list">
-              <li class="nav__link click" id="aboutLink">About</li>
-              <li class="nav__link click" id="contactLink">Contact Us</li>
+        <nav class="nav">
+          <ul class="nav__list">
+            <li class="nav__link click" id="aboutLink">About</li>
+            <li class="nav__link click" id="contactLink">Contact Us</li>
+          </ul>
+          <button class="contrast" aria-label="Toggle Theme">
+            <i class="fa-solid fa-circle-half-stroke"></i>
+          </button>
+
+          <!-- Burger Menu Button -->
+          <button class="burgerBtn" id="burgerOpen">
+            <i class="fa-solid fa-burger"></i>
+          </button>
+
+          <!-- Hidden Burger Menu -->
+          <div class="menu" id="burgerMenu">
+            <ul class="nav__list--burger">
+              <li class="nav__link burger__link click" id="aboutLinkBurger">
+                About
+              </li>
+              <li class="nav__link burger__link click" id="contactLinkBurger">
+                Contact Us
+              </li>
             </ul>
-            <button class="contrast" aria-label="Toggle Theme">
-              <i class="fa-solid fa-circle-half-stroke"></i>
-            </button>
-            <div class="burger">
-              <i class="fa-solid fa-burger"></i>
-              <ul class="nav__list--burger">
-                <li class="nav__link--burger click" id="aboutLink">About</li>
-                <li class="nav__link--burger click" id="contactLink">Contact Us</li>
-              </ul>
-            </div>
-          </nav>
-        </div>
+            <button class="burgerClose" id="burgerClose">&times;</button>
+          </div>
+        </nav>
       </div>
     </header>
 
