@@ -685,12 +685,12 @@ section {
   }
 
   .nav {
-    justify-content: space-around;
+    justify-content: space-between;
     width: 50%;
   }
 
   #navList {
-    width: 50%;
+    width: 100%;
   }
 
   #headerTitle {
@@ -702,11 +702,45 @@ section {
   }
 
   .navList {
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
   }
 
   .burgerBtn {
     display: flex;
+  }
+
+  .search__wrapper {
+    h2 {
+      font-size: 32px;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .header {
+    max-width: 768px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    max-width: 400px;
+  }
+
+  #headerTitle {
+    font-size: 28px;
+  }
+
+  .search__wrapper {
+    h2 {
+      font-size: 28px;
+    }
   }
 }
