@@ -8,7 +8,9 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="/WeatherAPI/styles.css" />
+    <link rel="stylesheet" href="styles.css" />
     <script src="/WeatherAPI/app.js" defer></script>
+    <script src="app.js" defer></script>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <title>Weather Search</title>
   </head>
@@ -76,7 +78,7 @@
     <div class="modal__background" id="modalBackground"></div>
 
     <!-- About Modal -->
-    <div id="aboutModal" class="modal__about">
+    <div id="aboutModal" class="modal__about modal">
       <div class="modal-content">
         <span class="close" id="closeAboutModal">&times;</span>
         <p>
@@ -87,7 +89,7 @@
     </div>
 
     <!-- Contact Modal -->
-    <div id="contactModal" class="modal__contact">
+    <div id="contactModal" class="modal__contact modal">
       <div class="modal-content">
         <span class="close" id="closeContactModal">&times;</span>
         <p>We'd love to hear from you!</p>

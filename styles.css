@@ -320,8 +320,7 @@ header {
 }
 
 /* Modal */
-.modal__about,
-.modal__contact {
+.modal {
   visibility: hidden;
   opacity: 0;
   position: fixed;
@@ -744,6 +743,39 @@ section {
     font-size: 40px;
   }
 
+  .modal__background {
+    display: none;
+  }
+
+  .modal {
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-content {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    top: 0;
+    padding: 128px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+  }
+
+  #contactModalForm {
+    padding: 12px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
   .nav__list {
     display: none;
   }
@@ -771,10 +803,32 @@ section {
     margin-top: 24px;
   }
 
+  .weather__content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
   .weather__result {
-    width: 50%;
+    width: 100%;
+    height: 100%;
     padding: 48px;
     margin: 0 auto;
+    border: 0;
+
+    h3 {
+      font-size: 54px;
+    }
+
+    p {
+      font-size: 48px;
+    }
+
+    button {
+      font-size: 48px;
+      width: 50%;
+    }
   }
 }
 
@@ -787,21 +841,34 @@ section {
     font-size: 28px;
   }
 
+  .modal-content {
+    padding: 96px;
+  }
+
   .search__wrapper {
     h2 {
       font-size: 28px;
     }
   }
+}
+
+@media (max-width: 400px) {
+  .modal-content {
+    padding: 48px;
+    margin: 0 auto;
+  }
+
+  .weather__content {
+    justify-content: space-evenly;
+  }
 
   .weather__result {
-    width: 75%;
-
     h3 {
       font-size: 36px;
     }
 
     p {
-      font-size: 30px;
+      font-size: 32px;
     }
   }
 }
