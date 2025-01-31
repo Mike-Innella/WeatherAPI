@@ -19,7 +19,7 @@ const toggleDarkTheme = () => document.body.classList.toggle("dark-theme");
 
 // Modal functions
 const toggleModal = (modal, show) => {
-  const background = document.getElementById("modalBackground"); // Always target the same background
+  const background = document.getElementById("modalBackground");
 
   if (!modal) return;
 
@@ -28,8 +28,10 @@ const toggleModal = (modal, show) => {
     background.classList.add("show");
     setTimeout(() => {
       header.style.opacity = "0";
-      searchWrapper.style.opacity = "0";
-    }, 50);
+      if (!document.querySelector(".menu").classList.contains("menu--open")) {
+        searchWrapper.style.opacity = "0";
+      }
+    }, 120);
   } else {
     modal.classList.remove("show");
     background.classList.remove("show");
@@ -109,10 +111,16 @@ function toggleBurgerMenu() {
   if (isOpening) {
     headerTitle.style.opacity = "0";
     searchWrapper.style.opacity = "0";
+    setTimeout(() => {
+      searchWrapper.style.display = "none";
+    }, 240);
     navList.style.opacity = "0";
   } else {
     headerTitle.style.opacity = "1";
     searchWrapper.style.opacity = "1";
+    setTimeout(() => {
+      searchWrapper.style.display = "block";
+    }, 240);
     navList.style.opacity = "1";
   }
 }
