@@ -143,11 +143,13 @@ searchForm?.addEventListener("submit", async (event) => {
 
     weatherDisplay.className = "weather__result";
     weatherDisplay.innerHTML = `
+    <div class = "weather__content">
       <h3>Weather in ${name}</h3>
       <p>🌡️ ${((main.temp * 9) / 5 + 32).toFixed(2)}°F</p>
       <p>☁️ ${weather[0].description}</p>
       <p>💨 ${(wind.speed * 2.23694).toFixed(2)} mph</p>
       <button class="close-weather">Close</button>
+      </div>
     `;
     weatherContainer?.appendChild(weatherDisplay);
     weatherDisplay.style.display = "block";
