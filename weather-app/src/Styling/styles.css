@@ -309,8 +309,9 @@ header {
   background-color: #030303b7;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 400ms ease, visibility 0ms 400ms ease;
+  transition: all 400ms ease;
   cursor: default;
+  z-index: 2;
 }
 
 .modal__background.show {
@@ -330,6 +331,7 @@ header {
   height: 100%;
   overflow: none;
   transition: all 400ms ease;
+  transform: scale(0.9);
 }
 
 .modal__about {
@@ -453,7 +455,9 @@ header {
   visibility: visible;
   opacity: 1;
   transform: translate(0, 0);
+  transform: scale(1);
   display: block;
+  transition: all 400ms ease; /* Ensure smooth transition for both visibility and scaling */
 }
 
 /* Close Button */
@@ -488,7 +492,7 @@ header {
   align-items: center;
   justify-content: center;
   font-size: 24px;
-  z-index: 10;
+  z-index: 1;
   transition: opacity 400ms ease;
   opacity: 0;
   top: 0;
