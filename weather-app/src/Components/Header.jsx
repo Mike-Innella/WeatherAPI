@@ -1,5 +1,3 @@
-// src/components/Header.jsx
-
 import { useState } from "react";
 
 const Header = ({ onAboutClick, onContactClick, onToggleTheme }) => {
@@ -30,25 +28,24 @@ const Header = ({ onAboutClick, onContactClick, onToggleTheme }) => {
             </button>
 
             <button className="burgerBtn" onClick={toggleMenu}>
-              <i className="fa fa-bars"></i>
+              <i className={`fa ${menuOpen ? "fa-times" : "fa-bars"}`}></i>
             </button>
           </div>
 
-          {menuOpen && (
-            <div className="menu">
-              <button className="burgerClose" onClick={toggleMenu}>
-                X
-              </button>
-              <ul className="nav__list--burger">
-                <li className="nav__link" onClick={onAboutClick}>
-                  About
-                </li>
-                <li className="nav__link" onClick={onContactClick}>
-                  Contact Us
-                </li>
-              </ul>
-            </div>
-          )}
+          {/* Conditional rendering for mobile menu */}
+          <div className={`menu ${menuOpen ? "open" : ""}`}>
+            <button className="burgerClose" onClick={toggleMenu}>
+              X
+            </button>
+            <ul className="nav__list--burger">
+              <li className="nav__link" onClick={onAboutClick}>
+                About
+              </li>
+              <li className="nav__link" onClick={onContactClick}>
+                Contact Us
+              </li>
+            </ul>
+          </div>
         </nav>
       </div>
     </header>
