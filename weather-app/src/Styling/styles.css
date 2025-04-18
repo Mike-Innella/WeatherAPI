@@ -100,6 +100,16 @@ h3 {
   border-color: #eb3c3c;
 }
 
+/* Header Dark Mode */
+.dark-theme .header {
+  background-color: #222;
+  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .header__title h1 {
+  color: #f5f5f5;
+}
+
 /* Search icon always white */
 .search__bar i {
   color: #ffffff;
@@ -241,41 +251,61 @@ h3 {
 
 /* Burger Menu */
 .burgerBtn {
-  display: none;
+  display: none; /* Hidden by default on desktop */
   font-size: 28px;
-}
-
-.menu {
-  position: fixed;
-  top: 0;
-  right: -200%;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.9);
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.menu--open {
-  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
   z-index: 100;
 }
 
+/* Menu Styles */
+.menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 400ms ease;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.menu--open {
+  left: 0;
+  opacity: 1;
+  visibility: visible;
+}
+
 .burgerClose {
-  font-size: 48px;
-  font-weight: 900;
-  color: #969696;
   position: absolute;
   top: 24px;
   right: 24px;
+  font-size: 48px;
+  font-weight: 900;
+  color: #969696;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.burgerClose:hover {
+  color: #eb3c3c;
 }
 
 .nav__list--burger {
-  width: 50%;
-  margin: 0 auto;
-  font-size: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
 }
 
 /* Modals & Background*/
@@ -301,29 +331,38 @@ h3 {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 1000;
   width: 100%;
   max-width: 480px;
   opacity: 0;
   visibility: hidden;
-  transition: transform 400ms ease, opacity 400ms ease;
+  transition: all 400ms ease;
 }
 
+/* Specific modal variants */
 .modal__about {
-  transform: translateX(-150%);
+  transform: translateX(-150%, -50%); /* Start off-screen left */
 }
+
 .modal__contact {
-  transform: translateX(150%);
+  transform: translate(150%, -50%); /* Start off-screen right */
 }
 
 /* Show State */
 .modal.show {
   opacity: 1;
   visibility: visible;
-  transform: translate(-50%, -50%) scale(1);
 }
 
+.modal.show.modal__about {
+  transform: translate(-50%, -50%); /* Move to center from left */
+}
+
+.modal.show.modal__contact {
+  transform: translate(-50%, -50%); /* Move to center from right */
+}
+
+/* Modal Content */
 .modal-content {
   position: relative;
   display: flex;
@@ -576,7 +615,9 @@ h3 {
   }
 }
 
-/* Weather Result */
+/* Weather Result & Overlay*/
+
+/* Overlay */
 .weather__overlay {
   position: fixed;
   top: 0;
@@ -588,23 +629,72 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 400ms ease;
+  opacity: 0;
+  visibility: hidden;
 }
 
+.weather__overlay.fade-in {
+  opacity: 1;
+  visibility: visible;
+}
+
+.weather__overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 400ms ease;
+}
+
+/* Result Card */
 .weather__result {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 100%); /* Adjusted to 100% */
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
   background-color: #f5f5f5;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
-  animation: slide 800ms forwards;
-  opacity: 1;
-  visibility: visible;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px #00000026;
+  opacity: 0;
+  visibility: hidden;
   z-index: 900;
+  width: 90%;
+  max-width: 400px;
 }
 
+/* Animations */
+@keyframes slideIn {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.weather__result.slide-in {
+  animation: slideIn 0.4s ease forwards;
+}
+
+.weather__result.slide-out {
+  animation: slideOut 0.4s ease forwards;
+}
+
+/* Additional Styles */
 .weather__content {
   z-index: 500;
   opacity: 1;
@@ -635,16 +725,15 @@ h3 {
   z-index: 400;
 }
 
-@keyframes slide {
-  from {
-    transform: translate(-50%, 50%);
-    opacity: 0;
-    visibility: hidden;
+/* Media Queries */
+@media (max-width: 1200px) {
+  .header__wrapper {
+    padding: 24px;
+    justify-content: space-between;
   }
-  to {
-    transform: translate(-50%, -50%);
-    opacity: 1;
-    visibility: visible;
+
+  .search__wrapper h2 {
+    font-size: 32px;
   }
 }
 
@@ -660,28 +749,19 @@ h3 {
   }
 }
 
-/* For screens up to 768px */
+/* For screens up to 768px - Burger Menu Activates */
 @media (max-width: 768px) {
   #headerTitle {
     font-size: 40px;
   }
 
-  .modal {
-    top: 0;
-    left: 0;
-    max-width: 100%;
-    height: 100%;
-  }
-
-  .modal-content {
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
-    padding: 128px;
-  }
-
+  /* Hide regular nav, show burger */
   .nav__list {
     display: none;
+  }
+
+  .nav__link {
+    font-size: 72px;
   }
 
   .contrast {
@@ -694,68 +774,126 @@ h3 {
     cursor: pointer;
   }
 
+  .burgerClose {
+    margin: 48px;
+    font-size: 72px;
+  }
+
+  /* Full-screen modals */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    transform: translateX(150%);
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  .modal__about {
+    transform: translateX(-150%);
+  }
+
+  .modal.show {
+    transform: translateX(0);
+  }
+
+  .modal-content {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    padding: 80px 24px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+  }
+
+  .modal-content p {
+    font-size: 28px;
+    text-align: center;
+    max-width: 100%;
+  }
+
   .nav__list--burger {
     display: flex;
     flex-direction: column;
     margin-top: 50px;
   }
 
+  /* Weather card adjustments */
   .weather__result {
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 48px;
     border: 0;
+    border-radius: 0;
+    margin: 0;
+    box-sizing: border-box;
   }
 
   .weather__result h3 {
-    font-size: 54px;
+    font-size: 42px;
+    text-align: center;
   }
 
   .weather__result p {
-    font-size: 48px;
+    font-size: 36px;
+    text-align: center;
   }
 
   .weather__result button {
-    font-size: 48px;
-    width: 50%;
-  }
-
-  /* Menu Styles */
-  .menu {
-    position: fixed;
-    top: 0;
-    left: -100%; /* Initially off-screen */
+    font-size: 36px;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    margin: 20px auto 0;
+  }
+
+  /* Modal Contact Adjustments */
+  .modal__contact form {
+    font-size: 20px;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
     flex-direction: column;
-    text-align: center;
-    transition: transform 0.3s ease-in-out; /* Smooth transition */
-    z-index: 1000;
+    align-items: center;
   }
 
-  .menu.open {
-    transform: translateX(100%); /* Slide in from the left */
+  .modal__contact input,
+  .modal__contact textarea {
+    font-size: 20px;
+    width: 100%;
+    max-width: 100%;
   }
 
-  .burgerClose {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: none;
-    border: none;
-    font-size: 32px;
-    color: white;
-    cursor: pointer;
-  }
-
-  .nav__list--burger li {
-    padding: 10px;
-    color: white;
+  .modal__contact button {
     font-size: 24px;
+    width: 100%;
+    max-width: 80%;
+  }
+
+  /* Close Button Adjustment */
+  .close {
+    font-size: 48px;
+    right: 16px;
+    top: 16px;
+    position: absolute;
   }
 }
 
@@ -765,17 +903,15 @@ h3 {
   }
 
   .modal-content {
-    padding: 96px;
+    padding: 60px 16px;
+  }
+
+  .modal-content p {
+    font-size: 24px;
   }
 
   .search__wrapper h2 {
     font-size: 28px;
-  }
-}
-
-@media (max-width: 400px) {
-  .modal-content {
-    padding: 48px;
   }
 
   .weather__result h3 {
@@ -783,6 +919,29 @@ h3 {
   }
 
   .weather__result p {
+    font-size: 28px;
+  }
+
+  .weather__result button {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 400px) {
+  .modal-content {
+    padding: 48px 12px;
+  }
+
+  .weather__result h3 {
     font-size: 32px;
+  }
+
+  .weather__result p {
+    font-size: 24px;
+  }
+
+  .weather__result button {
+    font-size: 24px;
+    width: 100%;
   }
 }

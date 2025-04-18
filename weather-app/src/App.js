@@ -35,13 +35,13 @@ function App() {
   };
 
   const handleOpenAbout = (e) => {
-    e.stopPropagation();  
+    e?.stopPropagation();  
     console.log("Opening About modal");
     setIsAboutOpen(true);
   };
   
   const handleOpenContact = (e) => {
-    e.stopPropagation();  
+    e?.stopPropagation();  
     console.log("Opening Contact modal");
     setIsContactOpen(true);
   };

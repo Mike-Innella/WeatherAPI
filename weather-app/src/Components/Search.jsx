@@ -4,8 +4,10 @@ const Search = ({ fetchWeather, weatherData, setWeatherData }) => {
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(false);
+  const [animationState, setAnimationState] = useState(""); // 'slide-in', 'slide-out'
 
   const handleSubmit = async (e) => {
+    setAnimationState("slide-in");
     e.preventDefault();
     if (city) {
       setLoading(true);
@@ -13,16 +15,21 @@ const Search = ({ fetchWeather, weatherData, setWeatherData }) => {
       await fetchWeather(city);
       setCity("");
 
-      // Slight delay to allow spinner animation
-      setTimeout(() => {
-        setLoading(false);
-      }, 1500);
+      setTimeout(() => setLoading(false), 1600);
     }
   };
 
-  const handleCloseWeather = () => {
-    setWeatherData(null);
-    setOverlayVisible(false);
+  const handleCloseWeather = (e) => {
+    // Start the slide-out animation
+    setAnimationState("slide-out");
+    e.preventDefault();
+
+    // Wait for the slide-out animation to complete before removing weather data
+    setTimeout(() => {
+      setWeatherData(null);
+      setOverlayVisible(false);
+      setAnimationState("");
+    }, 400);
   };
 
   return (
@@ -39,11 +46,11 @@ const Search = ({ fetchWeather, weatherData, setWeatherData }) => {
         </div>
       )}
 
-      {/* Weather Result Overlay */}
+      {/* Weather Result & Overlay */}
       {!loading && weatherData && overlayVisible && (
         <>
-          <div className="weather__overlay visible"></div>
-          <div className="weather__result">
+          <div className="weather__overlay"></div>
+          <div className={`weather__result ${animationState}`}>
             <div className="weather__content">
               <h3>Weather in {weatherData.name}</h3>
               <p>🌡️ {((weatherData.main.temp * 9) / 5 + 32).toFixed(2)}°F</p>
@@ -73,12 +80,8 @@ const Search = ({ fetchWeather, weatherData, setWeatherData }) => {
                     disabled={loading}
                     required
                   />
-                  <button type="submit" disabled={loading}>
-                    {loading ? (
-                      <i className="fa fa-spinner fa-spin"></i>
-                    ) : (
-                      <i className="fa fa-search"></i>
-                    )}
+                  <button type="submit">
+                    <i className="fa fa-search"></i>
                   </button>
                 </form>
               </div>

@@ -5,6 +5,16 @@ const Header = ({ onAboutClick, onContactClick, onToggleTheme }) => {
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
+  const handleMobileAboutClick = () => {
+    onAboutClick();
+    // Leave menu open
+  };
+
+  const handleMobileContactClick = () => {
+    onContactClick();
+    // Leave menu open
+  };
+
   return (
     <header className="header" id="header">
       <div className="header__wrapper">
@@ -28,20 +38,19 @@ const Header = ({ onAboutClick, onContactClick, onToggleTheme }) => {
             </button>
 
             <button className="burgerBtn" onClick={toggleMenu}>
-              <i className={`fa ${menuOpen ? "fa-times" : "fa-bars"}`}></i>
+              <i className="fa fa-bars"></i>
             </button>
           </div>
 
-          {/* Conditional rendering for mobile menu */}
-          <div className={`menu ${menuOpen ? "open" : ""}`}>
+          <div className={`menu ${menuOpen ? "menu--open" : ""}`}>
             <button className="burgerClose" onClick={toggleMenu}>
               X
             </button>
             <ul className="nav__list--burger">
-              <li className="nav__link" onClick={onAboutClick}>
+              <li className="nav__link" onClick={handleMobileAboutClick}>
                 About
               </li>
-              <li className="nav__link" onClick={onContactClick}>
+              <li className="nav__link" onClick={handleMobileContactClick}>
                 Contact Us
               </li>
             </ul>
